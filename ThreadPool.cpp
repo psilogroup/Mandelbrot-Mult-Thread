@@ -27,10 +27,7 @@ void *worker(void *param)
 {
     while (1)
     {
-        //if no have job thread in IDLE
-        SDL_LockMutex(workerMutex);
-        SDL_CondWait(condHaveWork,workerMutex);
-        SDL_UnlockMutex(workerMutex);
+
 
         //Try to get Task
         Task *task = NULL;
@@ -54,7 +51,14 @@ void *worker(void *param)
         {
             task->DoWork();
         }
+         //if no have job thread in IDLE
+        if (num == 0)
+        {
 
+            SDL_LockMutex(workerMutex);
+            SDL_CondWait(condHaveWork,workerMutex);
+            SDL_UnlockMutex(workerMutex);
+        }
     }
 }
 ThreadPool::ThreadPool()

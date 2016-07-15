@@ -181,7 +181,7 @@ int main( int argc, char* args[] )
     poolThread.init(CPUCount);
 
     //allocate task's in memory
-    sliceTasks = new SliceComputeTask[CPUCount];
+    sliceTasks = new SliceComputeTask[64];
 
     //generate color Palette
     for (int k = 0; k < MaxIterations; k++)
@@ -301,7 +301,7 @@ int main( int argc, char* args[] )
     SDL_DestroyWindow( window );
     SDL_DestroyTexture(texture);
     poolThread.destroy();
-    delete sliceTasks;
+    //delete sliceTasks;
 
 //Quit SDL subsystems
     SDL_Quit();
@@ -315,10 +315,10 @@ int main( int argc, char* args[] )
 void draw_madelbrot()
 {
     //calculeta slice size
-    double step = SCREEN_HEIGHT / CPUCount;
+    double step = SCREEN_HEIGHT / (CPUCount*2);
 
     //foreach on CPU
-    for (int i = 0; i < CPUCount; i++)
+    for (int i = 0; i < (CPUCount*2); i++)
     {
 
         //Setup task
@@ -328,8 +328,6 @@ void draw_madelbrot()
 
         //Queque task
         poolThread.addWork((Task*)&sliceTasks[i]);
-
-
     }
 
     //wait all task finish
@@ -337,7 +335,7 @@ void draw_madelbrot()
     bool frameDone = false;
     while(frameDone == false)
     {
-        if (k+1 == CPUCount)
+        if (k+1 == (CPUCount*2))
             frameDone = true;
 
         if (sliceTasks[k].state == Finished)
