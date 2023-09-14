@@ -45,3 +45,19 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.pdb
+*.idb
+*.obj
+Mandelbrot/x64/Debug/Mandelbrot.vcxproj.FileListAbsolute.txt
+*.tlog
+*.recipe
+*.ilk
+Mandelbrot/x64/Debug/Mandelbrot.log
+Mandelbrot/Mandelbrot.vcxproj.user
+*.ipch
+Mandelbrot/.vs/Mandelbrot/v17/Browse.VC.opendb
+*.db-wal
+*.db-shm
+*.db
+Mandelbrot/.vs/Mandelbrot/v17/.suo
+*.vsidx
