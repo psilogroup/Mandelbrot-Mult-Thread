@@ -171,6 +171,25 @@ public:
 //don't alloc task on each thread
 SliceComputeTask *sliceTasks = NULL;
 
+SDL_Color palette(float t)
+{
+    float a = 0.5;
+    float b = 0.5;
+    float c = 0.4;
+    
+    float r, g, d;
+
+    r = a + b * cos(6.28318 * (1.0 * t + 0.0));
+    g = a + b * cos(6.28318 * (0.7 * t + 0.15));
+    d = a + b * cos(6.28318 * (0.4 * t + 0.20));
+
+    SDL_Color aux;
+    aux.r = std::round(r * 255);
+    aux.g = std::round(g * 255);
+    aux.b = std::round(d * 255);
+    return aux;
+}
+
 
 int main( int argc, char* args[] )
 {
@@ -203,6 +222,7 @@ int main( int argc, char* args[] )
             g = 1;
         if (b > 1)
             b = 1;
+
 
         colorPal[k + 0] = k*20;
         colorPal[k + 1] = k;
